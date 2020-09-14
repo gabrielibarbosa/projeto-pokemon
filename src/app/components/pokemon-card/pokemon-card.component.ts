@@ -1,5 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { PokemonList } from '../../entities/pokemon-list.interface';
 import { Pokemon } from '../../entities/pokemon.interface';
+import { PokemonGetByIdService } from '../../services/pokemon-get-by-id.service';
 
 @Component({
   selector: 'app-pokemon-card',
@@ -8,10 +10,29 @@ import { Pokemon } from '../../entities/pokemon.interface';
 })
 export class PokemonCardComponent implements OnInit {
 
-  @Input() pokemon: Pokemon;
-  constructor() { }
+  @Input() pokemon: PokemonList;
+  pokeinfos: Pokemon;
+  openDescription = false;
+
+  constructor(
+    public pokemonGetByIdService: PokemonGetByIdService
+  ) { }
 
   ngOnInit(): void {
+
+  }
+
+  descriptionPokemon(nome: string) {
+   this.pokemonGetByIdService.getPokemonById(nome)
+    .subscribe((pokeinfos) => {
+      console.log(pokeinfos);
+      this.pokeinfos = pokeinfos;
+      this.descriptionCard(this.openDescription);
+    });
+  }
+
+  descriptionCard(action) {
+    this.openDescription = !action;
   }
 
 }

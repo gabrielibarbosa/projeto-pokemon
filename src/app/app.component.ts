@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { Pokemon } from './entities/pokemon.interface';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { PokemonList } from './entities/pokemon-list.interface';
 import { PokemonGetAllService } from './services/pokemon-get-all.service';
 
 @Component({
@@ -9,7 +9,9 @@ import { PokemonGetAllService } from './services/pokemon-get-all.service';
 })
 export class AppComponent implements OnInit {
 
-  pokemons: Array<Pokemon> = [];
+  next: string;
+  pokemons: Array<PokemonList> = [];
+  @ViewChild('ionInputPesquisa', { static: false }) ionInputPesquisa: Input;
 
   constructor(
     public pokemonGetAllService: PokemonGetAllService
@@ -20,9 +22,16 @@ export class AppComponent implements OnInit {
   }
 
   getPokemons() {
-    this.pokemonGetAllService.getAll().subscribe((pokemons) => {
-      console.log(pokemons);
+    this.pokemonGetAllService.getPokemons().subscribe((pokemons) => {
       this.pokemons = pokemons.results;
+      this.next = pokemons.next;
+    });
+  }
+
+  carregarMais() {
+    this.pokemonGetAllService.more(this.next).subscribe((pokemons) => {
+      this.pokemons = pokemons.results;
+      this.next = pokemons.next;
     });
   }
 }

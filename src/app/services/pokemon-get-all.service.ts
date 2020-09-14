@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
-import { Pokemon } from '../entities/pokemon.interface';
+import { map } from 'rxjs/operators';
+import { PaginacaoPokemon } from '../entities/paginacao.interface';
 
 const API_URL = 'https://pokeapi.co/api/v2/pokemon';
 
@@ -14,10 +14,20 @@ export class PokemonGetAllService {
     private httpClient: HttpClient
   ) { }
 
-  getAll(): Observable<Pokemon[]> {
-    return this.httpClient.get<Pokemon[]>(API_URL)
+  getPokemons(): Observable<PaginacaoPokemon> {
+    return this.httpClient.get<PaginacaoPokemon>(API_URL)
       .pipe(
-        tap(pokemon => {
+        map(pokemon => {
+          return pokemon;
+        })
+      );
+  }
+
+  more(next: string): Observable<PaginacaoPokemon> {
+
+    return this.httpClient.get<PaginacaoPokemon>(next)
+      .pipe(
+        map(pokemon => {
           return pokemon;
         })
       );
