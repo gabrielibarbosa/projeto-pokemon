@@ -1,3 +1,14 @@
-<div>
-  <app-pokemon-menu></app-pokemon-menu>
+<div class="grid">
+  <div class="row">
+    <div class="col-md-12">
+      <app-pokemon-menu></app-pokemon-menu>
+    </div>
+  </div>
+</div>
+<div class="grid">
+  <div class="row">
+    <div *ngFor="let pokemon of pokemons" class="col-md-3">
+      <app-pokemon-card [pokemon]='pokemon'> </app-pokemon-card>
+    </div>
+  </div>
 </div>

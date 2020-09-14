@@ -5,6 +5,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { PokemonMenuComponent } from './components/pokemon-menu/pokemon-menu.component';
 import { PokemonCardComponent } from './components/pokemon-card/pokemon-card.component';
+import { HttpClientModule } from '@angular/common/http';
+import { PokemonGetAllService } from './services/pokemon-get-all.service';
 
 @NgModule({
   declarations: [
@@ -15,8 +17,11 @@ import { PokemonCardComponent } from './components/pokemon-card/pokemon-card.com
   imports: [
     BrowserModule,
     AppRoutingModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [
+    PokemonGetAllService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
