@@ -30,7 +30,9 @@ export class AppComponent implements OnInit {
 
   carregarMais() {
     this.pokemonGetAllService.more(this.next).subscribe((pokemons) => {
-      this.pokemons = pokemons.results;
+      pokemons.results.forEach((pokemon) => {
+        this.pokemons.push(pokemon);
+      });
       this.next = pokemons.next;
     });
   }
