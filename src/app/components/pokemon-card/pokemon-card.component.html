@@ -35,7 +35,7 @@
     </div>
     <div class="row">
       <div *ngFor="let abilities of pokeinfos.abilities" class="col-sm-4">
-        <p class="pokemon-font-blue-color" > {{ pokeinfos.name | titlecase }}</p>
+        <p class="pokemon-font-blue-color" > {{ abilities.name | titlecase }}</p>
       </div>
     </div>
   </div>
