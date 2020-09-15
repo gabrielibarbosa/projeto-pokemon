@@ -2,30 +2,29 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { Pokemon } from '../entities/pokemon.interface';
+import { PokemonForm } from '../entities/pakemon-form.interface';
 
-const API_URL = 'https://pokeapi.co/api/v2/pokemon';
+const API_URL = 'https://pokeapi.co/api/v2/pokemon-form';
 
 @Injectable()
-export class PokemonGetByIdService {
+export class PokemonGetFormService {
 
   constructor(
     private httpClient: HttpClient
   ) { }
 
-  getPokemonById(nome: string): Observable<Pokemon> {
-    return this.httpClient.get<Pokemon>(API_URL + '/' + nome)
+  getForm(nome: string): Observable<PokemonForm> {
+    return this.httpClient.get<PokemonForm>(API_URL + '/' + nome)
       .pipe(
         map((pokeinfos) => {
-         const pokedados: Pokemon = {
-          id: pokeinfos.id,
-          name: pokeinfos.name,
-          height: pokeinfos.height,
-          order: pokeinfos.order,
-          weight: pokeinfos.weight,
-          abilities: pokeinfos.abilities,
-         };
-         return pokedados;
+
+          const pokedados: PokemonForm = {
+            id: pokeinfos.id,
+            name: pokeinfos.name,
+            sprites: pokeinfos.sprites,
+          };
+
+          return pokedados;
         })
       );
   }
@@ -39,5 +38,4 @@ export class PokemonGetByIdService {
     }
     return throwError(errorMessage);
   }
-
 }

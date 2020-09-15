@@ -1,5 +1,5 @@
 <header>
-  <nav class="navbar bg-dark">
+  <nav class="navbar pokemon-menu-color">
     <a class="navbar-brand text-white" href="/">
       Projeto Pokemon
     </a>
@@ -8,13 +8,14 @@
 
 <div class="container-fluid">
   <div class="row">
-    <div *ngFor="let pokemon of pokemons" class="col-sm-6">
-      <app-pokemon-card [pokemon]='pokemon'> </app-pokemon-card>
+    <div *ngFor="let pokemon of pokeForms" class="col-sm-4">
+      <app-pokemon-card
+      [pokemon]='pokemon'> </app-pokemon-card>
     </div>
   </div>
   <div class="row">
     <div class="col-sm-12 pokemon-margin pokemon-centered">
-      <button type="button" class="btn btn-dark" (click)="carregarMais()">Carregar mais</button>
+      <button type="button" class="btn pokemon-button-blue-color" (click)="morePokemons()">Carregar mais</button>
     </div>
   </div>
 </div>

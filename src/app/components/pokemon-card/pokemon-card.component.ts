@@ -1,5 +1,5 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
-import { PokemonList } from '../../entities/pokemon-list.interface';
+import { Component, Input, OnInit } from '@angular/core';
+import { PokemonForm } from '../../entities/pakemon-form.interface';
 import { Pokemon } from '../../entities/pokemon.interface';
 import { PokemonGetByIdService } from '../../services/pokemon-get-by-id.service';
 
@@ -10,7 +10,7 @@ import { PokemonGetByIdService } from '../../services/pokemon-get-by-id.service'
 })
 export class PokemonCardComponent implements OnInit {
 
-  @Input() pokemon: PokemonList;
+  @Input() pokemon: PokemonForm;
   pokeinfos: Pokemon;
   openDescription = false;
 
@@ -19,20 +19,17 @@ export class PokemonCardComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-
   }
 
   descriptionPokemon(nome: string) {
-   this.pokemonGetByIdService.getPokemonById(nome)
-    .subscribe((pokeinfos) => {
-      console.log(pokeinfos);
-      this.pokeinfos = pokeinfos;
-      this.descriptionCard(this.openDescription);
-    });
+    this.pokemonGetByIdService.getPokemonById(nome)
+      .subscribe((pokeinfos) => {
+        this.pokeinfos = pokeinfos;
+        this.openCard(this.openDescription);
+      });
   }
 
-  descriptionCard(action) {
+  openCard(action) {
     this.openDescription = !action;
   }
-
 }

@@ -1,6 +1,9 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { PokemonForm } from './entities/pakemon-form.interface';
 import { PokemonList } from './entities/pokemon-list.interface';
 import { PokemonGetAllService } from './services/pokemon-get-all.service';
+import { PokemonGetByIdService } from './services/pokemon-get-by-id.service';
+import { PokemonGetFormService } from './services/pokemon-get-form.service';
 
 @Component({
   selector: 'app-root',
@@ -9,12 +12,17 @@ import { PokemonGetAllService } from './services/pokemon-get-all.service';
 })
 export class AppComponent implements OnInit {
 
-  next: string;
-  pokemons: Array<PokemonList> = [];
   @ViewChild('ionInputPesquisa', { static: false }) ionInputPesquisa: Input;
 
+  next: string;
+  pokemons: Array<PokemonList> = [];
+  pokeForms: Array<PokemonForm> = [];
+  openDescription = false;
+
   constructor(
-    public pokemonGetAllService: PokemonGetAllService
+    public pokemonGetAllService: PokemonGetAllService,
+    public pokemonGetByIdService: PokemonGetByIdService,
+    public pokemonGetFormService: PokemonGetFormService
   ) { }
 
   ngOnInit(): void {
@@ -23,15 +31,24 @@ export class AppComponent implements OnInit {
 
   getPokemons() {
     this.pokemonGetAllService.getPokemons().subscribe((pokemons) => {
-      this.pokemons = pokemons.results;
+      pokemons.results.forEach((pokemon) => {
+        this.formPokemon(pokemon.name);
+      });
       this.next = pokemons.next;
     });
   }
 
-  carregarMais() {
+  formPokemon(nome: string) {
+    this.pokemonGetFormService.getForm(nome)
+      .subscribe((pokeForms) => {
+        this.pokeForms.push(pokeForms);
+      });
+  }
+
+  morePokemons() {
     this.pokemonGetAllService.more(this.next).subscribe((pokemons) => {
       pokemons.results.forEach((pokemon) => {
-        this.pokemons.push(pokemon);
+        this.formPokemon(pokemon.name);
       });
       this.next = pokemons.next;
     });

@@ -7,6 +7,7 @@ import { PokemonCardComponent } from './components/pokemon-card/pokemon-card.com
 import { HttpClientModule } from '@angular/common/http';
 import { PokemonGetAllService } from './services/pokemon-get-all.service';
 import { PokemonGetByIdService } from './services/pokemon-get-by-id.service';
+import { PokemonGetFormService } from './services/pokemon-get-form.service';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { PokemonGetByIdService } from './services/pokemon-get-by-id.service';
   ],
   providers: [
     PokemonGetAllService,
-    PokemonGetByIdService
+    PokemonGetByIdService,
+    PokemonGetFormService
   ],
   bootstrap: [AppComponent]
 })
