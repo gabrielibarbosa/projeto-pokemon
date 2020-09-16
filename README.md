@@ -1,6 +1,9 @@
-# ProjetoPokemon
+# ProjetosPokemon
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.0.6.
+Projeto em Angular 9 e Bootstrap.
+API utilizada para consumir dados: https://pokeapi.co/docs/v2.
+
+<img src="/src/assets/imagens/icon-pokemon.png" height="100" widht="100"></img>
 
 ## Development server
 
