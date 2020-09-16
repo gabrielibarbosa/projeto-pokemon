@@ -2,10 +2,22 @@
   margin: 10px;
 }
 
+.pokemon-card-header {
+  background-color: #2d4059;
+  color: #f4f4f4 ;
+
+}
+
 .pokemon-body {
   align-items: center;
 }
 
 .pokemon-card :hover {
  background-color:#f4f4f4;
+ color: #2d4059 ;
+}
+
+.pokemon-margin-top-title {
+  margin-top: 20%;
+  text-align: center;
 }

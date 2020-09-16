@@ -17,7 +17,7 @@ import { PokemonGetFormService } from './services/pokemon-get-form.service';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   providers: [
     PokemonGetAllService,

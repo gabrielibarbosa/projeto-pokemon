@@ -1,4 +1,6 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { PokemonGetByIdService } from '../../services/pokemon-get-by-id.service';
 
 import { PokemonCardComponent } from './pokemon-card.component';
 
@@ -8,18 +10,30 @@ describe('PokemonCardComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PokemonCardComponent ]
+      declarations: [
+        PokemonCardComponent
+      ],
+      imports: [
+        HttpClientTestingModule
+      ],
+      providers: [
+        PokemonGetByIdService
+      ]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
-  beforeEach(() => {
+  it('should create', () => {
     fixture = TestBed.createComponent(PokemonCardComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
+    expect(component).toBeTruthy();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
+  it('Deve chamar descriptionPokemon', () => {
+    const nome = 'bulbasaur';
+
+    const descriptionPokemon = spyOn(component, 'descriptionPokemon');
+    component.descriptionPokemon(nome);
+    expect(descriptionPokemon).toHaveBeenCalled();
   });
 });

@@ -24,7 +24,6 @@ export class PokemonGetAllService {
   }
 
   more(next: string): Observable<PaginacaoPokemon> {
-
     return this.httpClient.get<PaginacaoPokemon>(next)
       .pipe(
         map(pokemon => {

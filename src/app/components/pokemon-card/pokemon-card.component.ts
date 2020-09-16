@@ -11,11 +11,12 @@ import { PokemonGetByIdService } from '../../services/pokemon-get-by-id.service'
 export class PokemonCardComponent implements OnInit {
 
   @Input() pokemon: PokemonForm;
+
   pokeinfos: Pokemon;
   openDescription = false;
 
   constructor(
-    public pokemonGetByIdService: PokemonGetByIdService
+    public pokemonGetByIdService: PokemonGetByIdService,
   ) { }
 
   ngOnInit(): void {

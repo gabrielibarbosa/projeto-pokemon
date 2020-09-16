@@ -4,17 +4,18 @@ import { Observable, throwError } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Pokemon } from '../entities/pokemon.interface';
 
-const API_URL = 'https://pokeapi.co/api/v2/pokemon';
-
 @Injectable()
 export class PokemonGetByIdService {
 
+  get url() {
+    return `https://pokeapi.co/api/v2/pokemon`;
+  }
   constructor(
     private httpClient: HttpClient
   ) { }
 
   getPokemonById(nome: string): Observable<Pokemon> {
-    return this.httpClient.get<Pokemon>(API_URL + '/' + nome)
+    return this.httpClient.get<Pokemon>(this.url + '/' + nome)
       .pipe(
         map((pokeinfos) => {
          const pokedados: Pokemon = {
